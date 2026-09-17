@@ -294,11 +294,11 @@ def parse_args(argv=None):
                    help="decimal places on tick labels (default: 0)")
     p.add_argument("--unit", default="°C",
                    help="text for the header box; empty string to omit")
-    p.add_argument("--labels", choices=["inside", "outside"], default="inside",
-                   help="labels over the gradient (as on the original) or "
-                        "beside it (default: inside)")
-    p.add_argument("--font-pt", type=float, default=18.0,
-                   help="label/unit font size in points (default: 18)")
+    p.add_argument("--labels", choices=["inside", "outside"], default="outside",
+                   help="labels beside the bar, or over the gradient as on the "
+                        "original (default: outside)")
+    p.add_argument("--font-pt", type=float, default=14.0,
+                   help="label/unit font size in points (default: 14)")
     p.add_argument("--font-weight", default="bold", help="default: bold")
     p.add_argument("--height-mm", type=float, default=90.0,
                    help="height of the coloured bar (default: 90)")

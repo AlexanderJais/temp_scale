@@ -4,7 +4,7 @@ Recreates the thermal-camera rainbow scale bar as a clean vector/raster graphic,
 set in **Nimbus Sans Bold** at a size that stays readable when the bar is
 inserted small into a figure.
 
-![inside layout](out/temp_scale.png)
+![scale bar](out/temp_scale.png)
 
 ## Quick start
 
@@ -16,21 +16,24 @@ python3 make_scale.py                        # -> out/temp_scale.{png,pdf,svg,js
 python3 verify.py out/temp_scale             # check colours against temperatures
 ```
 
-Defaults: range 18.6–39.6 °C, ticks every 2 °C, bar 90 mm tall, 18 pt labels,
-600 dpi. That is a 16.1 × 105.7 mm graphic — scale it to whatever the final
-figure needs; the PDF and SVG are vector, so it stays sharp.
+Defaults: labels beside the bar, range 18.6–39.6 °C, ticks every 2 °C, bar
+90 mm tall, 14 pt labels, 600 dpi. That is a 20.7 × 108.1 mm graphic — scale it
+to whatever the final figure needs; the PDF and SVG are vector, so it stays
+sharp.
 
 ## The two layouts
 
-| `--labels inside` (default) | `--labels outside` |
+| `--labels outside` (default) | `--labels inside` |
 |---|---|
-| Faithful to the original: numbers sit on the gradient, tick dashes bite in from both edges. Each label is automatically black or white depending on the luminance underneath it, with a contrasting outline so it survives being shrunk. | Numbers beside the bar on the page background. Lets the bar itself stay slim, and gives the crispest small-size result. |
+| Numbers beside the bar on the page background. Keeps the bar slim and gives the crispest result when the graphic is shrunk. | Faithful to the original: numbers sit on the gradient, tick dashes bite in from both edges. Each label is automatically black or white depending on the luminance underneath it, with a contrasting outline so it survives being shrunk. |
 
 ```bash
-python3 make_scale.py --labels outside --out out/temp_scale_outside
+python3 make_scale.py --labels inside --out out/temp_scale_inside
 ```
 
-Both are in `out/`.
+Both are in `out/`. 14 pt stays comfortably readable down to roughly a 40 mm
+tall insert; below that, or if the bar sits on a busy background, bump
+`--font-pt` back up.
 
 ## Colours really do match temperatures
 
@@ -98,13 +101,13 @@ wrong.
 | `--range VMIN VMAX` | `18.6 39.6` | temperature span of the bar |
 | `--tick-step` / `--ticks` | `2` | automatic spacing, or explicit values |
 | `--decimals` | `0` | decimal places on labels |
-| `--font-pt` | `18` | label and unit size |
+| `--font-pt` | `14` | label and unit size |
 | `--height-mm` | `90` | height of the coloured bar |
 | `--bar-width-mm` | fitted | defaults to whatever the labels need |
-| `--labels` | `inside` | `inside` or `outside` |
+| `--labels` | `outside` | `outside` or `inside` |
 | `--unit` | `°C` | header box text; `--unit ""` to omit |
 | `--transparent` | off | no background, for overlaying on an image |
-| `--halo-lw` | `2.6` | outline behind inside labels; `0` disables |
+| `--halo-lw` | `2.6` | outline behind inside labels only; `0` disables |
 | `--palette` | built-in | CSV of `pos,R,G,B` |
 | `--dpi` | `600` | raster resolution |
 | `--formats` | `png pdf svg` | |

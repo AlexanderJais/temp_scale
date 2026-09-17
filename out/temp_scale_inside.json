@@ -28,24 +28,24 @@
   "palette": "rainbow",
   "dpi": 600,
   "figure_mm": [
-    22.3112,
-    112.0975
+    14.492,
+    103.1369
   ],
-  "sample_x_frac": 0.5,
+  "sample_x_frac": 0.179514,
   "frame_lw_px": 9.167,
   "figure_px": [
-    527.036,
-    2647.972
+    342.332,
+    2436.306
   ],
   "bar_bbox_px": [
-    28.34645669291338,
-    418.64173228346436,
-    272.8346456692913,
-    2544.6259842519685
+    28.34645669291339,
+    281.97506561679785,
+    313.98530183727036,
+    2407.959317585302
   ],
   "outputs": [
-    "out/temp_scale_outside.png",
-    "out/temp_scale_outside.pdf",
-    "out/temp_scale_outside.svg"
+    "out/temp_scale_inside.png",
+    "out/temp_scale_inside.pdf",
+    "out/temp_scale_inside.svg"
   ]
 }
