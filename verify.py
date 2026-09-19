@@ -31,7 +31,7 @@ def main(base: str, tol: float = 6.0) -> int:
     img = np.asarray(Image.open(f"{base}.png").convert("RGB"), dtype=float)
     x0, y0, x1, y1 = meta["bar_bbox_px"]
     vmin, vmax = meta["vmin"], meta["vmax"]
-    lut = pal.get_lut(None if meta["palette"] == "rainbow" else meta["palette"])
+    lut = pal.get_lut(meta["palette"])
 
     # make_scale.py works out which column is clear of the tick dashes and the
     # label glyphs; sample a small window around it and take the median so a

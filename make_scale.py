@@ -261,7 +261,7 @@ def build(args) -> dict:
     w_px, h_px = fig_w * MM * args.dpi, fig_h * MM * args.dpi
     meta = {
         "vmin": vmin, "vmax": vmax, "ticks": ticks, "labels": labels,
-        "palette": args.palette or "rainbow",
+        "palette": args.palette or pal.DEFAULT_PALETTE,
         "dpi": args.dpi, "figure_mm": [round(fig_w, 4), round(fig_h, 4)],
         "sample_x_frac": round(sample_x_frac, 6),
         "frame_lw_px": round(args.frame_lw / 72.0 * args.dpi, 3),
@@ -284,8 +284,8 @@ def parse_args(argv=None):
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--range", nargs=2, type=float, metavar=("VMIN", "VMAX"),
-                   default=[18.6, 39.6],
-                   help="temperature range spanned by the bar (default: 18.6 39.6)")
+                   default=[18.8, 39.9],
+                   help="temperature range spanned by the bar (default: 18.8 39.9)")
     p.add_argument("--ticks", nargs="*", type=float, default=None,
                    help="explicit tick temperatures (overrides --tick-step)")
     p.add_argument("--tick-step", type=float, default=2.0,
@@ -318,7 +318,9 @@ def parse_args(argv=None):
     p.add_argument("--background", default="white")
     p.add_argument("--transparent", action="store_true")
     p.add_argument("--palette", default=None,
-                   help="CSV palette (pos,R,G,B); omit for the built-in rainbow")
+                   help=f"palette name ({', '.join(pal.list_palettes())}) or the "
+                        f"path to a CSV of pos,R,G,B "
+                        f"(default: {pal.DEFAULT_PALETTE})")
     p.add_argument("--dpi", type=int, default=600)
     p.add_argument("--formats", nargs="+", default=["png", "pdf", "svg"])
     p.add_argument("--out", default="out/temp_scale",

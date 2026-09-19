@@ -1,6 +1,6 @@
 {
-  "vmin": 18.8,
-  "vmax": 39.9,
+  "vmin": 18.6,
+  "vmax": 39.6,
   "ticks": [
     20.0,
     22.0,
@@ -25,27 +25,27 @@
     "36",
     "38"
   ],
-  "palette": "rainbow-hc",
+  "palette": "rainbow",
   "dpi": 600,
   "figure_mm": [
-    14.492,
-    103.1369
+    20.742,
+    108.0758
   ],
-  "sample_x_frac": 0.179514,
+  "sample_x_frac": 0.5,
   "frame_lw_px": 9.167,
   "figure_px": [
-    342.332,
-    2436.306
+    489.97,
+    2552.972
   ],
   "bar_bbox_px": [
     28.34645669291339,
-    281.97506561679785,
-    313.98530183727036,
-    2407.959317585302
+    340.30839895013145,
+    272.8346456692913,
+    2466.292650918636
   ],
   "outputs": [
-    "out/temp_scale_inside.png",
-    "out/temp_scale_inside.pdf",
-    "out/temp_scale_inside.svg"
+    "out/temp_scale_rainbow.png",
+    "out/temp_scale_rainbow.pdf",
+    "out/temp_scale_rainbow.svg"
   ]
 }
