@@ -1,3 +1,14 @@
+# Figure graphics
+
+Two small generators for figure elements, both producing PNG + PDF + SVG:
+
+- [`make_scale.py`](#thermal-temperature-scale-bar) — a thermal-camera rainbow
+  scale bar
+- [`venn.py`](#venn-circles) — a two-circle Venn diagram with one region
+  highlighted
+
+---
+
 # Thermal temperature scale bar
 
 Recreates a thermal-camera rainbow scale bar as a clean vector/raster graphic,
@@ -133,7 +144,8 @@ spacing works out to, so set it to your own scene's actual min/max.
 ## Files
 
 ```
-make_scale.py       renderer (CLI)
+make_scale.py       scale-bar renderer (CLI)
+venn.py             Venn-circles renderer (CLI)
 palette.py          palette definitions, CSV load/save
 extract_palette.py  recover a LUT from an original screenshot
 verify.py           check rendered pixels against the palette
@@ -142,4 +154,54 @@ palettes/           each built-in palette as pos,R,G,B numbers
 out/temp_scale.*            default: rainbow-hc, outside labels
 out/temp_scale_inside.*     same palette, labels on the gradient
 out/temp_scale_rainbow.*    the earlier `rainbow` palette, 18.6-39.6 °C
+```
+
+---
+
+# Venn circles
+
+Two intersecting circles with one region filled, no text.
+
+```bash
+python3 venn.py                                  # -> out/venn.{png,pdf,svg}
+python3 venn.py --region top-only
+python3 venn.py --hatch xx --fill-color '#FBEAEA' --hatch-color '#C1272D'
+```
+
+Geometry is taken from the source figure: equal radii, stacked vertically, with
+the centre separation equal to the radius (`--separation 1.0`). That ratio is
+what sets the lens shape, and overlaying the result on the original shows the
+outlines coincide to within a pixel of antialiasing.
+
+Each region is a **single closed path of true Bezier arcs**, not one shape
+painted over another. So the fill is exact, it works on a transparent
+background, and it opens as one editable object in Illustrator or Inkscape
+rather than a stack of clipped circles.
+
+| `--region` | filled |
+|---|---|
+| `intersection` (default) | the overlap (lens) only |
+| `top-only` | top circle minus the overlap |
+| `bottom-only` | bottom circle minus the overlap |
+| `top` / `bottom` | one whole circle |
+| `union` | both circles |
+| `none` | outlines only |
+
+Other options: `--fill-color` (default `#C1272D`), `--hatch` (a matplotlib
+hatch such as `xx` for the crosshatch the source uses) with `--hatch-color`,
+`--radius-mm`, `--separation`, `--stroke-mm`, `--stroke-color`, `--horizontal`
+to sit the circles side by side, `--transparent`, `--alpha`, `--dpi`,
+`--formats`, `--out`.
+
+Colours measured off the source figure, if you want to match the rest of the
+panel: outline `#1E1E1E`, its green `#4F7A45`, its blue `#2A67AE`.
+
+Rendered to `out/`:
+
+```
+venn_overlap.*          overlap solid red
+venn_overlap_hatch.*    overlap as a red crosshatch on a pale tint,
+                        matching how the source draws it
+venn_top_only.*         top circle minus the overlap, red
+venn_bottom_only.*      bottom circle minus the overlap, red
 ```
